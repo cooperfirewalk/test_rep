@@ -1,2 +1,2 @@
 console.log('hi')
-alert('you rock!')
+console.log(document.querySelector('ul').children)

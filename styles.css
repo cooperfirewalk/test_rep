@@ -1,3 +1,6 @@
 body {
-    background-color: red;
+    background-color: aqua;
 }
+
+li {font-size: 40px;}
+.lists {display: flex; flex-direction: row;}
