@@ -37,4 +37,5 @@ emojiList.forEach((emojiListItem) => {
     }
 });
 
+emojiContainer.dataset.x = 5;
 
