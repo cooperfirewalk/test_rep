@@ -1,4 +1,5 @@
-import {getthis} from './git-test.js'
+// import {getthis} from './git-test.js'
+import './git-test.js'
 
 console.log('hi')
 console.log(document.querySelector('ul').children)
