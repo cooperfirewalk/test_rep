@@ -1,3 +1,5 @@
+import {getthis} from './git-test.js'
+
 console.log('hi')
 console.log(document.querySelector('ul').children)
 
@@ -20,4 +22,5 @@ x.innerHTML = `<img
   x.classList.add('social__comment')
 
   document.querySelector('.test').appendChild(x);
+  getthis();
 
