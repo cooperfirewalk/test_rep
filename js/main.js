@@ -6,8 +6,8 @@ console.log(document.querySelector('ul').children)
 document.querySelector('.test').innerHTML = `<li class="social__comment">
   <img
     class="social__picture"
-    src="{{аватар}}"
-    alt="{{имя комментатора}}"
+    src=""
+    alt=""
     width="35" height="35">
   <p class="social__text">{{текст комментария}}</p>
 </li>`;
