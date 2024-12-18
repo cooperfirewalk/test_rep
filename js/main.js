@@ -15,8 +15,8 @@ document.querySelector('.test').innerHTML = `<li class="social__comment">
 let x = document.createElement('li');
 x.innerHTML = `<img
     class="social__picture"
-    src="{{аватар}}"
-    alt="{{имя комментатора}}"
+    src=""
+    alt=""
     width="35" height="35">
   <p class="social__text">{{текст комментария}}</p>`
   x.classList.add('social__comment')
