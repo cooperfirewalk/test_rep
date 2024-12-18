@@ -23,5 +23,4 @@ x.innerHTML = `<img
   x.classList.add('social__comment')
 
   document.querySelector('.test').appendChild(x);
-  getthis();
 
