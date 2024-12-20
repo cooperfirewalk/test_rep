@@ -30,7 +30,9 @@ const maxAmount = {
 
 function validateAmount(value) {
   const unit = orderForm.querySelector('[name="unit"]:checked');
-  return value.length && parseInt(value) <= maxAmount[unit.value];
+  // Зачем 'value.length &&' в строчке ниже?
+  // return value.length && parseInt(value) <= maxAmount[unit.value];
+  return parseInt(value) <= maxAmount[unit.value];
 }
 
 function getAmountErrorMessage() {
@@ -41,7 +43,8 @@ function getAmountErrorMessage() {
 pristine.addValidator(amountField, validateAmount, getAmountErrorMessage);
 
 function onUnitChange() {
-  amountField.placeholder = maxAmount[this.value];
+  // Зачем строчка ниже?
+  // amountField.placeholder = maxAmount[this.value];
   pristine.validate(amountField);
 }
 
