@@ -3,31 +3,50 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Нюансы заполнения шаблонов данными</title>
-  <style>
-    .emojis {
-      display: inline-flex;
-      margin: 0.5em 1em;
-      padding: 0.1em 0.2em 0.25em;
-      list-style: none;
-      font-size: 2em;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.5);
-      border-radius: 1em;
-    }
-  </style>
+  <title>Валидация формы с помощью PristineJS</title>
 </head>
 
 <body>
-  <ul class="emojis">
-    <li class="emoji emoji--smile">🙂</li>
-    <li class="emoji emoji--neutral">😐</li>
-    <li class="emoji emoji--frowning">🙁</li>
-    <li class="emoji emoji--angry">😠</li>
-    <li class="emoji emoji--crying">😭</li>
-  </ul>
-  <div class="test">dfdf</div>
-  <script src="testjs.js"></script>
-  <script src="js/main.js" type="module"></script>
+  <form class="form" autocomplete="off">
+    <h3>Доставка Кексокорма</h3>
+
+    <p class="form__item">
+      <label for="nickname">Имя питомца для открытки:</label>
+      <br>
+      <input type="text" name="nickname" id="nickname" placeholder="Кексик">
+    </p>
+
+    <p>
+      Размер:
+      <label><input type="radio" name="unit" value="s" checked>S</label>
+      <label><input type="radio" name="unit" value="m">M</label>
+    </p>
+
+    <p class="form__item">
+      <label for="amount">Количество:</label>
+      <br>
+      <input type="number" name="amount" id="amount" placeholder="10">
+    </p>
+
+    <p class="form__item">
+      <select name="delivery">
+        <option value="Доставка" selected>Доставка</option>
+        <option value="Самовывоз">Самовывоз</option>
+      </select>
+      <select name="date">
+        <option value="Сегодня" selected>Сегодня</option>
+        <option value="Завтра">Завтра</option>
+        <option value="На выходных">На выходных</option>
+      </select>
+    </p>
+
+    <p>
+      <button>Заказать</button>
+    </p>
+  </form>
+
+  <script src="vendor/pristine/pristine.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
