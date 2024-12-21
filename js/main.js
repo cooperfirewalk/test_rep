@@ -1,82 +1,65 @@
-const orderForm = document.querySelector('.form');
+/* global noUiSlider:readonly */
+const sliderElement = document.querySelector('.level-form__slider');
+const valueElement = document.querySelector('.level-form__value');
+const valueElement2 = document.querySelector('.level-form__value2');
+const specialElement = document.querySelector('.level-form__special');
 
+valueElement.value = 80;
 
-const pristine = new Pristine(orderForm, {
-  classTo: 'form__item',
-  errorClass: 'form__item--invalid',
-  successClass: 'form__item--valid',
-  errorTextParent: 'form__item',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error'
-}, false);
-
-
-function validateNickname(value) {
-  return value.length >= 2 && value.length <= 50;
-}
-
-pristine.addValidator(
-  orderForm.querySelector('#nickname'),
-  validateNickname,
-  'От 2 до 50 символов'
-);
-
-
-const amountField = orderForm.querySelector('#amount');
-const maxAmount = {
-  's': 10,
-  'm': 5
-};
-
-function validateAmount(value) {
-  const unit = orderForm.querySelector('[name="unit"]:checked');
-  // Зачем 'value.length &&' в строчке ниже?
-  // return value.length && parseInt(value) <= maxAmount[unit.value];
-  return parseInt(value) <= maxAmount[unit.value];
-}
-
-function getAmountErrorMessage() {
-  const unit = orderForm.querySelector('[name="unit"]:checked');
-  return `Не больше ${maxAmount[unit.value]} штук в одни руки`;
-}
-
-pristine.addValidator(amountField, validateAmount, getAmountErrorMessage);
-
-function onUnitChange() {
-  // Зачем строчка ниже?
-  // amountField.placeholder = maxAmount[this.value];
-  pristine.validate(amountField);
-}
-
-orderForm
-  .querySelectorAll('[name="unit"]')
-  .forEach((item) => item.addEventListener('change', onUnitChange));
-
-
-const deliveryField = orderForm.querySelector('[name="delivery"]');
-const dateField = orderForm.querySelector('[name="date"]');
-const deliveryOption = {
-  'Доставка': ['Завтра', 'На выходных'],
-  'Самовывоз': ['Сегодня', 'Завтра']
-};
-
-function validateDelivery() {
-  return deliveryOption[deliveryField.value].includes(dateField.value);
-}
-
-function getDeliveryErrorMessage() {
-  return `
-    ${deliveryField.value}
-    ${dateField.value.toLowerCase()}
-    ${deliveryField.value === 'Доставка' ? 'невозможна' : 'невозможен'}
-  `;
-}
-
-pristine.addValidator(deliveryField, validateDelivery, getDeliveryErrorMessage);
-pristine.addValidator(dateField, validateDelivery, getDeliveryErrorMessage);
-
-
-orderForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 80,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
 });
+
+sliderElement.noUiSlider.on('update', () => {
+  valueElement.value = sliderElement.noUiSlider.get();
+  valueElement2.value = sliderElement.noUiSlider.get();
+});
+
+valueElement.addEventListener('input', () => {
+  sliderElement.noUiSlider.set(valueElement.value)
+})
+
+valueElement2.addEventListener('change', () => {
+  sliderElement.noUiSlider.set(valueElement2.value)
+})
+
+specialElement.addEventListener('change', (evt) => {
+  if (evt.target.checked) {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 1,
+        max: 10
+      },
+      start: 8,
+      step: 0.1
+    });
+  } else {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100,
+      },
+      step: 1
+    });
+    sliderElement.noUiSlider.set(80);
+  }
+});
+
+// sliderElement.noUiSlider.destroy();
